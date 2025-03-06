@@ -1,0 +1,18 @@
+<?php
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\CategoryController;
+
+Route::get('/user', function (Request $request) {
+    return $request->user();
+})->middleware('auth:sanctum');
+
+Route::controller(CategoryController::class)->prefix('categories')->group(function() {
+    Route::get('/', 'getCategories'); // GET /categories
+    Route::post('/', 'createCategory'); // POST /categories
+    Route::get('{categoryId}', 'getCategory');  
+    Route::patch('{categoryId}', 'updateCategory'); 
+    Route::delete('{categoryId}', 'deleteCategory'); // DELETE /categories/{categoryId}
+   
+});
